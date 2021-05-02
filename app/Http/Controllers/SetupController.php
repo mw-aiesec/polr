@@ -136,6 +136,11 @@ class SetupController extends Controller {
         $mail_from = $request->input('app:smtp_from');
         $mail_from_name = $request->input('app:smtp_from_name');
 
+        $openid_connect_url = $request->input('settings:openid_connect_url');
+        $openid_connect_configuration = $request->input('settings:openid_connect_configuration');
+        $openid_connect_client_id = $request->input('settings:openid_connect_client_id');
+        $openid_connect_client_secret = $request->input('settings:openid_connect_client_secret');
+
         if ($mail_host) {
             $mail_enabled = true;
         }
@@ -171,6 +176,11 @@ class SetupController extends Controller {
             'ST_ALLOWED_EMAIL_DOMAINS' => $st_allowed_email_domains,
             'POLR_RECAPTCHA_SITE_KEY' => $polr_recaptcha_site_key,
             'POLR_RECAPTCHA_SECRET' => $polr_recaptcha_secret_key,
+
+            'OPENID_CONNECT_URL' => $openid_connect_url,
+            'OPENID_CONNECT_CONFIGURATION' => $openid_connect_configuration,
+            'OPENID_CONNECT_CLIENT_ID' => $openid_connect_client_id,
+            'OPENID_CONNECT_CLIENT_SECRET' => $openid_connect_client_secret,
 
             'MAIL_ENABLED' => $mail_enabled,
             'MAIL_HOST' => $mail_host,
@@ -230,7 +240,9 @@ class SetupController extends Controller {
         // unset cookie
         setcookie('setup_arguments', '', time()-3600);
 
+
         $transaction_authorised = env('TMP_SETUP_AUTH_KEY') === $setup_finish_args->setup_auth_key;
+
 
         if ($transaction_authorised != true) {
             abort(403, 'Transaction unauthorised.');
