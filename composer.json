@@ -14,9 +14,11 @@
         "torann/geoip": "^1.0",
         "geoip2/geoip2": "^2.4",
         "nesbot/carbon": "^1.22",
-        "doctrine/dbal": "^2.5",
+        "doctrine/dbal": "2.5.11",
         "google/recaptcha": "~1.1",
+        "symfony/http-foundation": "2.7.51",
         "jumbojett/openid-connect-php": "^0.8.0"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.0",
